@@ -12,12 +12,10 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='certificaciones',
-            options={'verbose_name': 'Certificaciones',
-                     'verbose_name_plural': 'Certificaciones'},
+            options={'verbose_name': 'Certificaciones', 'verbose_name_plural': 'Certificaciones'},
         ),
         migrations.AlterModelOptions(
             name='profesor',
-            options={'verbose_name': 'Profesor',
-                     'verbose_name_plural': 'profesores'},
+            options={'verbose_name': 'Profesor', 'verbose_name_plural': 'profesores'},
         ),
     ]

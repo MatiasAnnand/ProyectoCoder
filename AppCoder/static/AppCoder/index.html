@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-
-        {% load static %}
-        
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -16,17 +13,17 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'AppCoder/css/styles.css' %}" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
-                <a class="navbar-brand" href="{% url 'Cursos' %}">Cursos</a>
-                <a class="navbar-brand" href="{% url 'Estudiantes' %}">Estudiante</a>
-                <a class="navbar-brand" href="{% url 'Entregables' %}">Entregable</a>
-                <a class="navbar-brand" href="{% url 'Profesores' %}">Profesor</a>
+                <a class="navbar-brand" href="#!">Inicio</a>
+                <a class="navbar-brand" href="#!">Clase</a>
+                <a class="navbar-brand" href="#!">Estudiante</a>
+                <a class="navbar-brand" href="#!">Entregable</a>
+                <a class="navbar-brand" href="#!">Profesor</a>
                 <a class="btn btn-primary" href="#signup">Registrarse</a>
             </div>
         </nav>
@@ -37,20 +34,47 @@
                     <div class="col-xl-6">
                         <div class="text-center text-white">
                             <!-- Page heading-->
-
-                            {% block contenidoModificable %}
-
-                            {% endblock %}
-                            
+                            <h1 class="mb-5">Mi primera página web con Django</h1>
+                            <!-- Signup form-->
+                            <!-- * * * * * * * * * * * * * * *-->
+                            <!-- * * SB Forms Contact Form * *-->
+                            <!-- * * * * * * * * * * * * * * *-->
+                            <!-- This form is pre-integrated with SB Forms.-->
+                            <!-- To make this form functional, sign up at-->
+                            <!-- https://startbootstrap.com/solution/contact-forms-->
+                            <!-- to get an API token!-->
+                            <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                                <!-- Email address input-->
+                                <div class="row">
+                                    <div class="col">
+                                        <input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required,email" />
+                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Email Address is required.</div>
+                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
+                                    </div>
+                                    <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Ingresar</button></div>
+                                </div>
+                                <!-- Submit success message-->
+                                <!---->
+                                <!-- This is what your users will see when the form-->
+                                <!-- has successfully submitted-->
+                                <div class="d-none" id="submitSuccessMessage">
+                                    <div class="text-center mb-3">
+                                        <div class="fw-bolder">Form submission successful!</div>
+                                        <p>To activate this form, sign up at</p>
+                                        <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                    </div>
+                                </div>
+                                <!-- Submit error message-->
+                                <!---->
+                                <!-- This is what your users will see when there is-->
+                                <!-- an error submitting the form-->
+                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
-
-        {% block contenido2 %}
-        {% endblock %}
 
         <!-- Footer-->
         <footer class="footer bg-light">
@@ -68,6 +92,7 @@
                         </ul>
                         <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2022. All Rights Reserved.</p>
                     </div>
+                    
                 </div>
             </div>
         </footer>

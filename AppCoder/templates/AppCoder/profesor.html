@@ -4,9 +4,7 @@
 
 {% block contenidoModificable %}
 
-<h1>
-    <p style="color:red;">Estos son los Profesores de Coderhouse.</p>
-</h1>
+<h1><p style="color:red;">Estos son los Profesores de Coderhouse.</p></h1>
 
 {% endblock %}
 
@@ -14,20 +12,20 @@
 
 {% if miFormulario.errors %}
 
-<p style="color: red">Datos incorrectos</p>
+    <p style="color: red">Datos incorrectos</p>
 
-{% endif %}
+    {% endif %}
 
-<form action="" method="POST"> {% csrf_token %}
+    <form action="" method="POST"> {% csrf_token %}
 
-    <table>
+        <table>
 
-        {{myForm.as_table}}
+            {{myForm.as_table}}
 
-    </table>
+        </table>
 
-    <input type="submit" value="Enviar">
+        <input type="submit" value="Enviar">
 
-</form>
+    </form>
 
 {% endblock %}

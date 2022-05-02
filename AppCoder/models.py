@@ -1,17 +1,14 @@
 from django.db import models
 
 # Create your models here.
-
-
 class Curso(models.Model):
     nombre = models.CharField(max_length=40)
     camada = models.IntegerField()
     duracion = models.IntegerField(default=0)
 
     def __str__(self):
-        txt = "{0} - {1}"
+        txt="{0} - {1}"
         return txt.format(self.camada, self.nombre)
-
 
 class Estudiante(models.Model):
     nombre = models.CharField(max_length=30)
@@ -19,13 +16,12 @@ class Estudiante(models.Model):
     email = models.EmailField(default="")
 
     def __str__(self):
-        txt = "{0} , {1}"
+        txt="{0} , {1}"
         return txt.format(self.apellido, self.nombre)
-
 
 class Profesor(models.Model):
 
-    def __str__(self):  # Permite mostrar la info mejor en el admin de la app
+    def __str__(self): # Permite mostrar la info mejor en el admin de la app
         return f"Nombre: {self.nombre} - Apellido: {self.apellido} - Email: {self.email} - Profesion: {self.profesion}"
 
     nombre = models.CharField(max_length=30)
@@ -37,12 +33,10 @@ class Profesor(models.Model):
         verbose_name = "Profesor"
         verbose_name_plural = "profesores"
 
-
 class Entregable(models.Model):
     nombre = models.CharField(max_length=30)
     fechaDeEngrega = models.DateField()
     entregado = models.BooleanField()
-
 
 class Certificaciones(models.Model):
     nombre = models.CharField(max_length=30)

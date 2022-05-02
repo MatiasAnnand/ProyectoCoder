@@ -12,20 +12,20 @@
 
 {% if miFormulario.errors %}
 
-<p style="color: red">Datos incorrectos</p>
+    <p style="color: red">Datos incorrectos</p>
 
-{% endif %}
+    {% endif %}
 
-<form action="" method="POST"> {% csrf_token %}
+    <form action="" method="POST"> {% csrf_token %}
 
-    <table>
+        <table>
 
-        {{miFormulario.as_table}}
+            {{miFormulario.as_table}}
 
-    </table>
+        </table>
 
-    <input type="submit" value="Enviar">
+        <input type="submit" value="Enviar">
 
-</form>
+    </form>
 
-{% endblock %}
+    {% endblock %}
