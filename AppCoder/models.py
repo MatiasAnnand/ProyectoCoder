@@ -1,4 +1,6 @@
+from distutils.command.upload import upload
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Curso(models.Model):
@@ -46,3 +48,12 @@ class Certificaciones(models.Model):
     class Meta:
         verbose_name = "Certificaciones"
         verbose_name_plural = "Certificaciones"
+
+
+class Avatar(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to = 'avatares', null = True, blank = True)
+
+    class Meta:
+        verbose_name = "Avatar"
+        verbose_name_plural = "Avatares"

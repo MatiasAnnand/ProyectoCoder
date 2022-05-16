@@ -17,6 +17,7 @@ urlpatterns = [
     path("listaProfes/", views.listaProfesores, name="ListaProfesores"),
     path("chauProfe/<profesor_nombre>", views.borrarProfesores, name="BorrarProfesor"),
     path("editarProfesor/<profesor_nombre>", views.editarProfesores, name="EditarProfesor"),
+    path("editarUsuario/<profesor_nombre>", views.editarUsuario, name="EditarUsuario"),
 
     path("curso/lista", views.CursoList.as_view(), name='ListCursos'),
     path(r'^(?P<pk>\d+)$', views.CursoDetalle.as_view(), name='Detail'),
@@ -26,4 +27,5 @@ urlpatterns = [
 
     path('login', views.login_request, name='Login'),
     path('logout', LogoutView.as_view(template_name='AppCoder/logout.html'), name='Logout'),
+    path('register', views.register, name='Register'),
 ]

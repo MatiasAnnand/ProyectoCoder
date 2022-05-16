@@ -4,28 +4,25 @@
 
 {% block contenidoModificable %}
 
-<h1>Estos son los cursos.</h1>
+    <h1>Formulario - Editar Usuario</h1>
 
-{% endblock %}
+    {% if miFormulario.errors %}
 
-{% block contenido2 %}
-
-{% if miFormulario.errors %}
-
-    <p style="color: red">Datos incorrectos</p>
+    <p style='color: red'> Estan mal los datos </p>
 
     {% endif %}
 
     <form action="" method="POST"> {% csrf_token %}
-
+    
         <table>
 
-            {{miFormulario.as_table}}
+            {miFormulario.as_table}}
 
         </table>
 
-        <input type="submit" value="Enviar">
+        <input type="submit", value="Enviar", style="color:blue">
 
     </form>
+
 
 {% endblock %}

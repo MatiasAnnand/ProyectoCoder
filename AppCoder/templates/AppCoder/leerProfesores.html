@@ -1,3 +1,9 @@
+{% extends "AppCoder/padre.html" %}
+
+{% load static %}
+
+{% block contenido2 %}
+
 {% for p in profesores %}
 
 <li>{{p}}</li>
@@ -13,3 +19,8 @@
 </button>
 
 {% endfor %}
+
+<br>
+<br>
+
+{% endblock %}

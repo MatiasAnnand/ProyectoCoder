@@ -2,18 +2,38 @@ from dataclasses import fields
 from msilib.schema import ListView
 from django.http import HttpResponse
 from django.shortcuts import render
-from AppCoder.forms import CursoFormulario, ProfesorFormulario
-from AppCoder.models import Curso, Profesor
+from AppCoder.forms import CursoFormulario, ProfesorFormulario, RegistroFormulario
+from AppCoder.models import Avatar, Curso, Profesor
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
 
 
 # Create your views here.
+
+def register(request):
+
+    if request.method == 'POST':
+
+        form = RegistroFormulario(request.POST)
+
+        if form.is_valid():
+
+            username=form.cleaned_data['username']
+            form.save()
+
+            return render(request, "AppCoder/inicio.html", {'mensaje':"Usuario Creado"})
+
+    else:
+
+        form = RegistroFormulario()  # formulario de django que permite crear usuarios
+
+    return render(request, "AppCoder/registro.html", {'form':form})
+
 
 def login_request(request):
     
@@ -40,8 +60,8 @@ def login_request(request):
 
         return render(request, "AppCoder/login.html", {'form':form})  # vincular la vista con la plantilla del html
 
-        
 
+@login_required
 def curso(request):
 
     if request.method == 'POST':
@@ -109,10 +129,12 @@ def profesor(request):
 
     return render(request, "AppCoder/profesor.html", dict1)
 
-
+@login_required
 def inicio(request):
 
-    return render(request, "AppCoder/inicio.html")
+    avatares = Avatar.objects.filter(user=request.user.id)
+    imagen = avatares[0].imagen.url
+    return render(request, "AppCoder/inicio.html", {'url':imagen})
 
 
 def cursoFormulario(request):
@@ -181,6 +203,35 @@ def editarProfesores(request, profesor_nombre):
                                           'nombre': profesor.nombre, 'apellido': profesor.apellido, 'email': profesor.email, 'profesion': profesor.profesion})
 
     return render(request, "AppCoder/editarProfesor.html", {'miFormulario': miFormulario, 'profesor_nombre': profesor_nombre})
+
+
+def editarUsuario(request):
+
+    usuario = request.user
+
+    if request.method == "POST":
+
+        miFormulario = RegistroFormulario(request.POST)
+
+        if miFormulario.is_valid():
+
+            informacion = miFormulario.cleaned_data
+
+            usuario.username = informacion['nombre']
+            usuario.email = informacion['email']
+            usuario.password1 = informacion['password1']
+            usuario.password2 = informacion['password2']
+
+            usuario.save()
+
+            return render(request, "AppCoder/inicio.html")
+
+    else:
+
+        miFormulario = RegistroFormulario(initial={'username': usuario.nombre, 'email': usuario.email})
+
+    return render(request, "AppCoder/editarUsuario.html", {'miFormulario': miFormulario, 'usuario': usuario.username})
+
 
 @login_required
 def listaProfesores(request):
