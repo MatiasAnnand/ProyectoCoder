@@ -3,7 +3,7 @@ from msilib.schema import ListView
 from django.http import HttpResponse
 from django.shortcuts import render
 from AppCoder.forms import CursoFormulario, ProfesorFormulario, RegistroFormulario
-from AppCoder.models import Avatar, Curso, Profesor
+from AppCoder.models import Avatar, Curso, Estudiante, Profesor
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -13,8 +13,8 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
 
 
-# Create your views here.
 
+# Vista para registrarse
 def register(request):
 
     if request.method == 'POST':
@@ -35,6 +35,7 @@ def register(request):
     return render(request, "AppCoder/registro.html", {'form':form})
 
 
+# Vista para iniciar sesion
 def login_request(request):
     
     if request.method == 'POST':  # al presionar el boton "Iniciar Sesion"
@@ -61,8 +62,18 @@ def login_request(request):
         return render(request, "AppCoder/login.html", {'form':form})  # vincular la vista con la plantilla del html
 
 
+# Pagina Principal
 @login_required
-def curso(request):
+def inicio(request):
+
+    avatares = Avatar.objects.filter(user=request.user.id)
+    imagen = avatares[0].imagen.url
+    return render(request, "AppCoder/inicio.html", {'url':imagen})
+
+
+ # Vista para crear Cursos
+@login_required
+def agregarCurso(request):
 
     if request.method == 'POST':
 
@@ -90,17 +101,18 @@ def curso(request):
     return render(request, "AppCoder/curso.html", {"miFormulario": miFormulario})
 
 
-def estudiante(request):
+ # Agregar Estudiante
+def agregarEstudiante(request):
 
     return render(request, "AppCoder/estudiante.html")
 
-
-def entregable(request):
+ # Agregar Entregables
+def agregarEntregable(request):
 
     return render(request, "AppCoder/entregable.html")
 
-
-def profesor(request):
+ # Agregar Profesores
+def agregarProfesor(request):
 
     if request.method == 'POST':
 
@@ -129,16 +141,7 @@ def profesor(request):
 
     return render(request, "AppCoder/profesor.html", dict1)
 
-@login_required
-def inicio(request):
 
-    avatares = Avatar.objects.filter(user=request.user.id)
-    imagen = avatares[0].imagen.url
-    return render(request, "AppCoder/inicio.html", {'url':imagen})
-
-
-def cursoFormulario(request):
-    return
 
 @login_required
 def busquedaCamada(request):
@@ -243,20 +246,23 @@ def listaProfesores(request):
 
     return render(request, "AppCoder/leerProfesores.html", contexto)
 
-
+# Vista para mostrar a los cursos usando Clases.
 class CursoList(LoginRequiredMixin, ListView):
     model = Curso
     template_name = 'AppCoder/listaCursos.html'
 
+# Vista para mostrar el detalle de los cursos usando Clases (CRUD con Clases)
 class CursoDetalle(DetailView):
     model = Curso
     template_name = "AppCoder/cursoDetalle.html"
 
+# Vista para crear cursos usando Clases (CRUD con Clases)
 class CursoCreacion(CreateView):
     model = Curso
     success_url = "/AppCoder/curso/lista"
     fields = ['nombre', 'camada', 'duracion']
 
+# Vista para mostrar/ actualizar los cursos usando Clases (CRUD con Clases)
 class CursoUpdate(UpdateView):
     model = Curso
     success_url = "/AppCoder/curso/lista"
@@ -266,3 +272,7 @@ class CursoDelete(DeleteView):
     model = Curso
     success_url = "/AppCoder/curso/lista"
 
+# Vista para mostrar a los estudiantes usando Clases.
+class EstudianteList(LoginRequiredMixin, ListView):
+    model = Estudiante
+    template_name = 'AppCoder/listaEstudiante.html'

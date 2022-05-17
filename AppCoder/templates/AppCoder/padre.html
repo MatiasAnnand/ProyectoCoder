@@ -23,9 +23,9 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
-                <a class="navbar-brand" href="{% url 'Cursos' %}">Cursos</a>
-                <a class="navbar-brand" href="{% url 'Estudiantes' %}">Estudiante</a>
-                <a class="navbar-brand" href="{% url 'Entregables' %}">Entregable</a>
+                <a class="navbar-brand" href="{% url 'ListCursos' %}">Cursos</a>
+                <a class="navbar-brand" href="{% url 'ListEstudiantes' %}">Estudiante</a>
+                <a class="navbar-brand" href="">Entregable</a>
                 <a class="navbar-brand" href="{% url 'ListaProfesores' %}">Profesor</a>
 
                 {% if not user.is_authenticated %}

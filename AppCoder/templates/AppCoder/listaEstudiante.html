@@ -1,0 +1,35 @@
+{% extends "AppCoder/padre.html" %} 
+
+{% block contenidoModificable %}
+
+    <h1>Estudiantes de Coder - Python</h1>
+
+{% endblock %}
+
+{% block contenido2 %}
+    
+    <a href="">Crear</a>
+
+    <ul>
+        {% for estudiante in object_list %}
+
+        <li>
+
+            <p>Nombre: {{estudiante.nombre}}</p>
+            <p>Apellido: {{estudiante.apellido}}</p>  
+
+            <p>
+                
+                <a href="">Ver</a>
+                <a href="">Editar</a>
+                <a href="">Borrar</a>
+                
+            </p>
+
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
+{% endblock %}
