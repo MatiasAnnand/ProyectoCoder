@@ -19,18 +19,18 @@ def register(request):
 
     if request.method == 'POST':
 
-        form = RegistroFormulario(request.POST)
+        form = UserCreationForm(request.POST)
 
         if form.is_valid():
 
-            username=form.cleaned_data['username']
+            user=form.cleaned_data['username']
             form.save()
 
             return render(request, "AppCoder/inicio.html", {'mensaje':"Usuario Creado"})
 
     else:
 
-        form = RegistroFormulario()  # formulario de django que permite crear usuarios
+        form = UserCreationForm()  # formulario de django que permite crear usuarios
 
     return render(request, "AppCoder/registro.html", {'form':form})
 
@@ -245,6 +245,9 @@ def listaProfesores(request):
     contexto = {"profesores": profesores}
 
     return render(request, "AppCoder/leerProfesores.html", contexto)
+
+def about(request):
+    return render(request, 'AppCoder/about.html')
 
 # Vista para mostrar a los cursos usando Clases.
 class CursoList(LoginRequiredMixin, ListView):

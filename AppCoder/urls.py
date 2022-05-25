@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from AppCoder import views
 from django.contrib.auth.views import LogoutView
 
@@ -17,12 +17,13 @@ urlpatterns = [
     path("chauProfe/<profesor_nombre>", views.borrarProfesores, name="BorrarProfesor"),
     path("editarProfesor/<profesor_nombre>", views.editarProfesores, name="EditarProfesor"),
     path("editarUsuario/<profesor_nombre>", views.editarUsuario, name="EditarUsuario"),
+    path('about', views.about, name='aboutMe'),
 
     path("curso/lista", views.CursoList.as_view(), name='ListCursos'),
-    path(r'^(?P<pk>\d+)$', views.CursoDetalle.as_view(), name='Detail'),
-    path(r'^nuevo$', views.CursoCreacion.as_view(), name='New'),
-    path(r'^editar/(?P<pk>\d+)$', views.CursoUpdate.as_view(), name='Edit'),
-    path(r'^borrar/(?P<pk>\d+)$', views.CursoDelete.as_view(), name='Delete'),
+    re_path(r'^(?P<pk>\d+)$', views.CursoDetalle.as_view(), name='Detail'),
+    re_path(r'^nuevo$', views.CursoCreacion.as_view(), name='New'),
+    re_path(r'^editar/(?P<pk>\d+)$', views.CursoUpdate.as_view(), name='Edit'),
+    re_path(r'^borrar/(?P<pk>\d+)$', views.CursoDelete.as_view(), name='Delete'),
 
     path('login', views.login_request, name='Login'),
     path('logout', LogoutView.as_view(template_name='AppCoder/logout.html'), name='Logout'),
